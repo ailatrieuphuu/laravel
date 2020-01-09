@@ -11,6 +11,7 @@ class ThemLinhVucSeeder extends Seeder
      */
     public function run()
     {
+		 DB::table('linh_vuc')->insert($data);
         $data = [
         	[
         		'ten_linh_vuc'=>'Địa lý'
@@ -31,6 +32,6 @@ class ThemLinhVucSeeder extends Seeder
         		'ten_linh_vuc'=>'Âm nhạc'
         	],
         ];
-        DB::table('linh_vuc')->insert($data);
+       
     }
 }

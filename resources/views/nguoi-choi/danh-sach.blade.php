@@ -15,10 +15,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="header-title">Danh sách câu hỏi</h4>
-                <a href="{{ route('nguoi-choi.them-moi')}}" class="btn btn-success btn-rounded waves-effect waves-light">
-                    Thêm mới<span class="btn-label-right"><i class="mdi mdi-check-all"></i></span>
-                </a><br>
+                <h4 class="header-title">Danh sách Người chơi</h4>
                 <table id="nguoi-choi-datatable" class="table dt-responsive nowrap">
                     <thead>
                     <tr>
@@ -40,16 +37,21 @@
                             <td>{{ $nguoichoi->mat_khau }}</td>
                             <td>{{ $nguoichoi->email }}</td>
                             <td>{{ $nguoichoi->hinh_dai_dien }}</td>
-                            <td>{{ $nguoichoi->diem_Cao_nhat }}</td>
+                            <td>{{ $nguoichoi->diem_cao_nhat }}</td>
                             <td>{{ $nguoichoi->credit }}</td>
                             <td>
-                            <a href="{{route('nguoi-choi.cap-nhat',['id'=>$nguoichoi->id])}}"class="btn btn-purple waves-effect waves-light"><i class="mdi mdi-pencil"></i></a>
                             <a href="{{route('nguoi-choi.xoa',['id'=>$nguoichoi->id])}}" onclick="return confirm('Bạn có chắc muốn xóa???')"><i class="btn btn-danger mdi mdi-delete text-dark"></i></a>
-                          
                             </td>     
                         </tr>                    
                         @endforeach
-                      
+                        @csrf
+                            @if(session('error'))
+                                
+                                    <div class="content-error text-danger">
+                                        {{session('error')}}       
+                                    </div>
+                                              
+                            @endif
                     </tbody>   
                 </table>
             </div> <!-- end card body-->

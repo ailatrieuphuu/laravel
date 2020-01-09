@@ -2,7 +2,7 @@
 
 @section('css')
 <!-- third party css -->
-<link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('assets/libs/datatables/responsive.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('assets/libs/datatables/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('assets/libs/datatables/select.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
@@ -15,43 +15,34 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="header-title">Danh sách câu hỏi</h4>
-                <a href="{{ route('cau-hoi.them-moi')}}" class="btn btn-success btn-rounded waves-effect waves-light">
+                <h4 class="header-title">Danh sách Gói Credit</h4>
+                <a href="{{ route('goi-credit.them-moi')}}" class="btn btn-success btn-rounded waves-effect waves-light">
                     Thêm mới<span class="btn-label-right"><i class="mdi mdi-check-all"></i></span>
                 </a><br>
-                <table id="linh-vuc-datatable" class="table dt-responsive nowrap">
+                <table id="goi_credit-datatable" class="table dt-responsive nowrap">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nội dung</th>
-                            <th>Lĩnh vực</th>
-                            <th>Phương án A</th>
-                            <th>Phương án B</th>
-                            <th>Phương án C</th>
-                            <th>Phương án D</th>
-                            <th>Đáp án </th>
+                            <th>Tên Gói</th>
+                            <th>Credit</th>
+                            <th>Số Tiền</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($listCauHoi as $CauHoi)
+                        @foreach ($listGoiCredit as $goiCredit)
                             <tr>  
-                                <td>{{$CauHoi -> id}}</td>
-                                <td>{{$CauHoi -> noi_dung}}</td>
-                                <td>{{$CauHoi ->linhVuc-> ten_linh_vuc}}</td>
-                                <td>{{$CauHoi -> phuong_an_a}}</td>
-                                <td>{{$CauHoi -> phuong_an_b}}</td>
-                                <td>{{$CauHoi -> phuong_an_c}}</td>
-                                <td>{{$CauHoi -> phuong_an_d}}</td>
-                                <td>{{$CauHoi -> dap_an}}</td>
+                                <td>{{$goiCredit -> id}}</td>
+                                <td>{{$goiCredit -> ten_goi_credit}}</td>
+                                <td>{{$goiCredit -> credit}}</td>
+                                <td>{{$goiCredit -> so_tien}}</td>        
                                 <td>
-                                <a href="{{route('cau-hoi.cap-nhat',['id'=>$CauHoi->id])}}"class="btn btn-purple waves-effect waves-light"><i class="mdi mdi-pencil"></i></a>
-                                <a href="{{route('cau-hoi.xoa',['id'=>$CauHoi->id])}}" onclick="return confirm('Bạn có chắc muốn xóa???')"><i class="btn btn-danger mdi mdi-delete text-dark"></i></a>
+                                <a href="{{route('goi-credit.cap-nhat',['id'=>$goiCredit->id])}}"class="btn btn-purple waves-effect waves-light"><i class="mdi mdi-pencil"></i></a>
+                                <a href="{{route('goi-credit.xoa',['id'=>$goiCredit->id])}}" onclick="return confirm('Bạn có chắc muốn xóa???')"><i class="btn btn-danger mdi mdi-delete text-dark"></i></a> 
                                 </td>
                             </tr>
                         @endforeach
-                    </tbody>
-                    
+                    </tbody>   
                 </table>
             </div> <!-- end card body-->
         </div> <!-- end card -->
@@ -77,7 +68,7 @@
     <!-- third party js ends -->
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#cau-hoi-datatable").DataTable({
+            $("#goi-credit-datatable").DataTable({
                 language: {
                     paginate: {
                         previous: "<i class='mdi mdi-chevron-left'>",

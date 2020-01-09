@@ -11,6 +11,15 @@
             <form action="{{route('linh-vuc.xu-ly-them-moi')}}" method="POST" >
             @endif
                 @csrf
+                @if (count($errors) > 0)
+                    <ul>
+                    @foreach ($errors->all() as $error)
+                        <div class = 'alert alert-danger'>
+                            <li>{{ $error }}</li>   
+                        </div>
+                        @endforeach
+                    </ul> 
+                @endif
                 <div class="form-group">
                     <label for="ten_linh_vuc">Tên</label>
                     <input type="text" name="ten_linh_vuc"  class="form-control" id="ten_linh_vuc" @if(isset($linhVuc)) value ="{{ $linhVuc->ten_linh_vuc }}" @endif>

@@ -15,43 +15,42 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="header-title">Danh sách câu hỏi</h4>
-                <a href="{{ route('cau-hoi.them-moi')}}" class="btn btn-success btn-rounded waves-effect waves-light">
-                    Thêm mới<span class="btn-label-right"><i class="mdi mdi-check-all"></i></span>
-                </a><br>
+                <h4 class="header-title">Danh sách lịch sử mua credit</h4>
                 <table id="linh-vuc-datatable" class="table dt-responsive nowrap">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nội dung</th>
-                            <th>Lĩnh vực</th>
-                            <th>Phương án A</th>
-                            <th>Phương án B</th>
-                            <th>Phương án C</th>
-                            <th>Phương án D</th>
-                            <th>Đáp án </th>
+                            <th>Người Chơi ID</th>
+                            <th>Gói Credit ID</th>
+                            <th>Credit</th>
+                            <th>Số Tiền</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($listCauHoi as $CauHoi)
+                        @foreach ($listLichSuMuaCredit as $lichSuMuaCredit)
                             <tr>  
-                                <td>{{$CauHoi -> id}}</td>
-                                <td>{{$CauHoi -> noi_dung}}</td>
-                                <td>{{$CauHoi ->linhVuc-> ten_linh_vuc}}</td>
-                                <td>{{$CauHoi -> phuong_an_a}}</td>
-                                <td>{{$CauHoi -> phuong_an_b}}</td>
-                                <td>{{$CauHoi -> phuong_an_c}}</td>
-                                <td>{{$CauHoi -> phuong_an_d}}</td>
-                                <td>{{$CauHoi -> dap_an}}</td>
+                                <td>{{$lichSuMuaCredit -> id}}</td>
                                 <td>
-                                <a href="{{route('cau-hoi.cap-nhat',['id'=>$CauHoi->id])}}"class="btn btn-purple waves-effect waves-light"><i class="mdi mdi-pencil"></i></a>
-                                <a href="{{route('cau-hoi.xoa',['id'=>$CauHoi->id])}}" onclick="return confirm('Bạn có chắc muốn xóa???')"><i class="btn btn-danger mdi mdi-delete text-dark"></i></a>
+                                    @foreach ($ListNguoiChoi as $nguoiChoi)
+                                        @if($nguoiChoi->id == $lichSuMuaCredit->nguoi_choi_id)
+                                            {{  $nguoiChoi->ten_dang_nhap   }}
+                                        @endif
+                                    @endforeach
                                 </td>
+                                <td>
+                                    @foreach ($LichSuMuaCredit as $goiCredit)
+                                        @if($goiCredit->id == $lichSuMuaCredit->goi_credit_id)
+                                            {{  $goiCredit->ten_goi   }}
+                                        @endif
+                                    @endforeach
+                                </td>
+                                <td>{{$lichSuMuaCredit -> credit}}</td>
+                               <td>{{$lichSuMuaCredit -> so_tien}} </td>
+                               
                             </tr>
                         @endforeach
-                    </tbody>
-                    
+                    </tbody>   
                 </table>
             </div> <!-- end card body-->
         </div> <!-- end card -->
@@ -77,7 +76,7 @@
     <!-- third party js ends -->
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#cau-hoi-datatable").DataTable({
+            $("#lich-su-mua-credit-datatable").DataTable({
                 language: {
                     paginate: {
                         previous: "<i class='mdi mdi-chevron-left'>",

@@ -13,10 +13,6 @@ class CauHoiController extends Controller
     {   
         $linhVucID = $request->query('linh-vuc');
         $cauHoi = CauHoi::Where('linh_vuc_id',$linhVucID)->get()->random(1);
-        $result = [
-            'success'   =>   true,
-            'data'      =>   $cauHoi
-        ];
-        return response()->json($result);
+        return response()->json($cauHoi);
     }
 }

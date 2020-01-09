@@ -33,12 +33,20 @@
                                 <td>{{$linhVuc -> id}}</td>
                                 <td>{{$linhVuc -> ten_linh_vuc}}</td>
                                 <td>
-                                    <a href="{{route('linh-vuc.cap-nhat',['id'=>$linhVuc->id])}}"class="btn btn-purple waves-effect waves-light"><i class="mdi mdi-pencil"></i></button>
+                                    <a href="{{route('linh-vuc.cap-nhat',['id'=>$linhVuc->id])}}"class="btn btn-purple waves-effect waves-light"><i class="mdi mdi-pencil"></i></a>
                                     <a href="{{route('linh-vuc.xoa',['id'=>$linhVuc->id])}}" onclick="return confirm('Bạn có chắc muốn xóa???')"><i class="btn btn-danger mdi mdi-delete text-dark"></i></a>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>   
+                    @csrf
+                            @if(session('error'))
+                                
+                                    <div class="content-error text-danger">
+                                        {{session('error')}}       
+                                    </div>
+                                              
+                            @endif
                 </table>
             </div> <!-- end card body-->
         </div> <!-- end card -->

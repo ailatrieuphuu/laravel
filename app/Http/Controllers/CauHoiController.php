@@ -39,6 +39,25 @@ class CauHoiController extends Controller
      */
     public function store(Request $request)
     {
+        // $this->validate($request,[
+        //     'noi_dung'=>'required',
+        //     'linh_vuc_id'=>'required',
+        //     'phuong_an_a'=>'required',
+        //     'phuong_an_b'=>'required',
+        //     'phuong_an_c'=>'required',
+        //     'phuong_an_d'=>'required',
+        //     'dap_an'=>'required',
+
+        //     ],[
+        //     'noi_dung.required'=>'Nội dung không được bỏ trống',             
+        //     'linh_vuc_id.required'=>'Bạn chưa chọn lĩnh vực.Vui lòng chọn lĩnh vực',
+        //     'phuong_an_a.required'=>'Phương án A không được bỏ trống. Vui lòng xem lại',
+        //     'phuong_an_b.required'=>'Phương án B không được bỏ trống. Vui lòng xem lại',
+        //     'phuong_an_c.required'=>'Phương án C không được bỏ trống. Vui lòng xem lại',
+        //     'phuong_an_d.required'=>'Phương án D không được bỏ trống. Vui lòng xem lại',
+        //     'dap_an.required'=>'Đáp án không được bỏ trống. Vui lòng xem lại'
+        // ]);
+
         $cauHoi = new CauHoi;
         $cauHoi->noi_dung = $request->noi_dung;
         $cauHoi->linh_vuc_id = $request->linh_vuc;
@@ -109,4 +128,5 @@ class CauHoiController extends Controller
         $cauHoi->delete();
         return redirect()->route('cau-hoi.danh-sach');
     }
+    
 }

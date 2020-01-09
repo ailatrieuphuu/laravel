@@ -36,9 +36,24 @@ class NguoiChoiController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'ten_dang_nhap'=>'required',
+            'mat_khau'=>'required',
+            'email'=>'required',
+            'hinh_dai_dien'=>'required',
+            'diem_cao_nhat'=>'required',
+            'credit'=>'required',
+        ], [
+            'ten_dang_nhap.required' => 'Bạn chưa nhập username.',
+            'mat_khau.required' =>'Bạn chưa nhập password',
+            'email.required'=>'Bạn chưa nhập email',
+            'hinh_dai_dien.required'=>'Bạn chưa nhập hình đại diện',
+            'diem_cao_nhat.required'=>'Bạn chưa nhập điểm',
+            'credit.required'=>'Bạn chưa nhập credit',
+        ]);
         $nguoiChoi = new NguoiChoi;
         $nguoiChoi->ten_dang_nhap = $request->ten_dang_nhap;
-        $nguoiChoi->mat_khau = $request->mat_khau;
+        $nguoiChoi->mat_khau = bcrypt($request->mat_khau);
         $nguoiChoi->email = $request->email;
         $nguoiChoi->hinh_dai_dien = $request->hinh_dai_dien;
         $nguoiChoi->diem_cao_nhat = $request->diem_cao_nhat;
@@ -81,7 +96,7 @@ class NguoiChoiController extends Controller
     {
         $nguoiChoi = NguoiChoi::find($id);
         $nguoiChoi->ten_dang_nhap = $request->ten_dang_nhap;
-        $nguoiChoi->mat_khau = $request->mat_khau;
+        $nguoiChoi->mat_khau = bcrypt($request->mat_khau);
         $nguoiChoi->email = $request->email;
         $nguoiChoi->hinh_dai_dien = $request->hinh_dai_dien;
         $nguoiChoi->diem_cao_nhat = $request->diem_cao_nhat;
@@ -98,8 +113,8 @@ class NguoiChoiController extends Controller
      */
     public function destroy($id)
     {
-        $NguoiChoi = NguoiChoi::find($id);
-        $NguoiChoi->delete();
+        $nguoiChoi = NguoiChoi::find($id);
+        $nguoiChoi->delete();
         return redirect()->route('nguoi-choi.danh-sach');
     }
 }

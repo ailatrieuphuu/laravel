@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\LinhVuc;
 class LinhVucController extends Controller
@@ -35,10 +34,16 @@ class LinhVucController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'ten_linh_vuc'=>'required|unique:linh_vuc'
+        ], [
+            'ten_linh_vuc.required' => 'Bạn chưa nhập lĩnh vực.',
+            'ten_linh_vuc.unique' => 'Lĩnh vực đã có trong danh sách.'
+        ]);
         $linhVuc = new LinhVuc;
         $linhVuc->ten_linh_vuc = $request->ten_linh_vuc;
         $linhVuc->save();
-        return redirect()->route('linh-vuc.danh-sach');
+        return redirect()->route('linh-vuc.danh-sach')->with(['flash_message' => 'Thêm lĩnh vực thành công ']);
     }
 
     /**
@@ -73,10 +78,16 @@ class LinhVucController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'ten_linh_vuc'=>'required|unique:linh_vuc'
+        ], [
+            'ten_linh_vuc.required' => 'Bạn chưa nhập lĩnh vực.',
+            'ten_linh_vuc.unique' => 'Lĩnh vực đã có trong danh sách.'
+        ]);
         $linhVuc = LinhVuc::find($id);
         $linhVuc->ten_linh_vuc = $request->ten_linh_vuc;
         $linhVuc->save();
-        return redirect()->route('linh-vuc.danh-sach');
+        return redirect()->route('linh-vuc.danh-sach')->with(['flash_message' => 'Thêm lĩnh vực thành công ']);
     }
 
     /**
@@ -89,6 +100,6 @@ class LinhVucController extends Controller
     {
         $linhVuc = LinhVuc::find($id);
         $linhVuc->delete();
-        return redirect()->route('linh-vuc.danh-sach');
+        return redirect()->route('linh-vuc.danh-sach')->with(['flash_message' => 'Thêm lĩnh vực thành công ']);
     }
 }
